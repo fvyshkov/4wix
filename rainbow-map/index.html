@@ -1,55 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <style>
     body {
       margin: 0;
-      padding: 0;
     }
-
-    .rainbow-container {
-      width: 100%;
-      height: 700px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .rainbow-part {
-      flex: 1;
+    svg rect {
       cursor: pointer;
-      transition: opacity 0.2s;
+      transition: opacity 0.2s ease;
     }
-
-    .rainbow-part:hover {
+    svg rect:hover {
       opacity: 0.7;
     }
-
-    .red    { background-color: red; }
-    .orange { background-color: orange; }
-    .yellow { background-color: yellow; }
-    .green  { background-color: green; }
-    .blue   { background-color: blue; }
-    .indigo { background-color: indigo; }
-    .violet { background-color: violet; }
   </style>
 </head>
+
 <body>
-  <div class="rainbow-container">
-    <div class="rainbow-part red"    data-color="red"></div>
-    <div class="rainbow-part orange" data-color="orange"></div>
-    <div class="rainbow-part yellow" data-color="yellow"></div>
-    <div class="rainbow-part green"  data-color="green"></div>
-    <div class="rainbow-part blue"   data-color="blue"></div>
-    <div class="rainbow-part indigo" data-color="indigo"></div>
-    <div class="rainbow-part violet" data-color="violet"></div>
-  </div>
+
+<svg width="100" height="70" viewBox="0 0 100 70">
+  <rect id="red"    y="0"   width="100" height="10" fill="red"/>
+  <rect id="orange" y="10"  width="100" height="10" fill="orange"/>
+  <rect id="yellow" y="20"  width="100" height="10" fill="yellow"/>
+  <rect id="green"  y="30"  width="100" height="10" fill="green"/>
+  <rect id="blue"   y="40"  width="100" height="10" fill="blue"/>
+  <rect id="indigo" y="50"  width="100" height="10" fill="indigo"/>
+  <rect id="violet" y="60"  width="100" height="10" fill="violet"/>
+</svg>
 
   <script>
-    document.querySelectorAll('.rainbow-part').forEach(part => {
-      part.addEventListener('mouseenter', () => {
-        const id = part.dataset.color;
+    const ids = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+    ids.forEach(id => {
+      document.getElementById(id).addEventListener("mouseenter", () => {
         window.parent.postMessage({
           source: "my-custom-element",
           type: "user-action",
